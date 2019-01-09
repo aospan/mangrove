@@ -24,11 +24,11 @@ find_package(libmongocxx ${LIBMONGOCXX_REQUIRED_VERSION} REQUIRED)
 
 set(LIBBSON_REQUIRED_VERSION 1.3.4)
 set(LIBBSON_REQUIRED_ABI_VERSION 1.0)
-find_package(LibBSON ${LIBBSON_REQUIRED_VERSION} REQUIRED)
+find_package(libbson-1.0 ${LIBBSON_REQUIRED_VERSION} REQUIRED)
 
 set(LIBMONGOC_REQUIRED_VERSION 1.3.4)
 set(LIBMONGOC_REQUIRED_ABI_VERSION 1.0)
-find_package(LibMongoC ${LIBMONGOC_REQUIRED_VERSION} REQUIRED)
+find_package(libmongoc-1.0 ${LIBMONGOC_REQUIRED_VERSION} REQUIRED)
 
 # Update these as needed.
 # TODO: read from file
@@ -123,6 +123,14 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         REGEX ".+/test" EXCLUDE
 )
 
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/cereal/include/cereal
+        DESTINATION ${MANGROVE_HEADER_INSTALL_DIR}
+        COMPONENT dev
+        FILES_MATCHING
+            PATTERN "*.h"
+            PATTERN "*.hpp"
+)
+
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/config/export.hpp
     DESTINATION ${MANGROVE_HEADER_INSTALL_DIR}/mangrove/config
@@ -165,3 +173,5 @@ install(
 )
 
 add_subdirectory(test)
+
+
